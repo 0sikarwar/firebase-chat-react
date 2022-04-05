@@ -21,7 +21,7 @@ import {
 import { getAuthObj, getStoreObj, getDbObj } from "./initializeFirebaseApp";
 import { ref, serverTimestamp, onValue, onDisconnect, set, get, child } from "firebase/database";
 
-const currentUserId = () => getAuthObj().currentUser?.uid;
+export const currentUserId = () => getAuthObj().currentUser?.uid;
 
 const getUserDocRef = (id) => doc(getStoreObj(), "users", id);
 

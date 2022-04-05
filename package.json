@@ -1,6 +1,6 @@
 {
   "name": "firebase-chat-react",
-  "version": "0.1.01",
+  "version": "0.1.03",
   "description": "Integrate firebase chat",
   "author": "Sikarwar <gyanendersingh5@gmail.com>",
   "main": "dist/index.js",
@@ -30,12 +30,13 @@
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "babel-preset-minify": "^0.5.1"
+    "babel-preset-minify": "^0.5.1",
+    "clean-css-cli": "^5.6.0"
   },
   "scripts": {
-    "build:dev": "rm -rf dist && mkdir dist &&  babel src -d dist --copy-files",
-    "build:min": "BABEL_ENV=minify babel src -d dist && cp src/chat.css dist",
-    "build": "npm run build:dev"
+    "build:min": "rm -rf dist && mkdir dist && BABEL_ENV=minify babel src -d dist --copy-files",
+    "css:min": "./node_modules/.bin/cleancss -o  dist/chat.css  dist/chat.css",
+    "build": "npm run build:min && npm run css:min"
   },
   "eslintConfig": {
     "extends": [
