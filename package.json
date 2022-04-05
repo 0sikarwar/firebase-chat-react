@@ -1,0 +1,58 @@
+{
+  "name": "firebase-chat-react",
+  "version": "0.1.01",
+  "description": "Integrate firebase chat",
+  "author": "Sikarwar <gyanendersingh5@gmail.com>",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "firebase chat",
+    "chat with firebase",
+    "react firebase chat"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0sikarwar/firebase-chat-react.git"
+  },
+  "dependencies": {
+    "firebase": "^9.6.10"
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-preset-minify": "^0.5.1"
+  },
+  "scripts": {
+    "build:dev": "rm -rf dist && mkdir dist &&  babel src -d dist --copy-files",
+    "build:min": "BABEL_ENV=minify babel src -d dist && cp src/chat.css dist",
+    "build": "npm run build:dev"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
