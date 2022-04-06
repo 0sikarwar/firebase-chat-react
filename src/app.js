@@ -5,7 +5,7 @@ import ChatWindow from "./ChatWindow";
 import { currentUserId, getUsers, markReadLastMsg } from "./firebaseHelper";
 export const ChatContext = createContext();
 
-const FiresbaseChatReact = ({ config }) => {
+const FiresbaseChatReact = (props) => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -39,8 +39,8 @@ const FiresbaseChatReact = ({ config }) => {
       value={{ users, selectedUser, setSelectedUser, isChatOpen, setIsChatOpen, setSelectedUserIndex }}
     >
       <div>
-        <ChatToggle />
-        <ChatWindow />
+        <ChatToggle chatToggleIcon = {props.chatToggleIcon}/>
+        <ChatWindow {...props}/>
       </div>
     </ChatContext.Provider>
   );

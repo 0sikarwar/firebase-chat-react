@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { ChatContext } from "./app";
 
-const ChatToggle = () => {
+const ChatToggle = ({chatToggleIcon}) => {
   const { setIsChatOpen } = useContext(ChatContext);
   return (
     <div className="chat-toggles">
       <div className="extra-toggles"></div>
       <div className="chat-toggle-container" onClick={() => setIsChatOpen(true)}>
-        <ChatIcon className="chat-toggle" />
+        {chatToggleIcon || <ChatIcon className="chat-toggle" />}
       </div>
     </div>
   );

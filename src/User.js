@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DefaultAvatar from "./DefaultAvatar";
 import { fetchLastMsg } from "./firebaseHelper";
 
-const User = ({ user, onClick }) => {
+const User = ({ user, onClick, defaultAvatar }) => {
   const [lastMsg, setLastMsg] = useState(null);
   useEffect(() => {
     const unsub = fetchLastMsg(user.uid, setLastMsg);
@@ -10,7 +10,7 @@ const User = ({ user, onClick }) => {
   }, []);
   return (
     <div className="message-history row align-center" onClick={onClick}>
-      {user.avatar ? <img src={user.avatar} alt="Avatar" /> : <DefaultAvatar />}
+      {user.avatar ? <img src={user.avatar} alt="Avatar" /> : (defaultAvatar || <DefaultAvatar />)}
       <div>
         <p className="message-name">{user.name}</p>
         {!!lastMsg && (
