@@ -1,6 +1,6 @@
 {
   "name": "firebase-chat-react",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Integrate firebase chat",
   "author": "Sikarwar <gyanendersingh5@gmail.com>",
   "main": "dist/index.js",

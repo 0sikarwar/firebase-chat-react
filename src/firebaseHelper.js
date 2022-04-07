@@ -23,7 +23,7 @@ import { ref, serverTimestamp, onValue, onDisconnect, set, get, child } from "fi
 
 export function currentUserId (){ return getAuthObj().currentUser?.uid;}
 const getUserDocRef = (id) => doc(getStoreObj(), "users", id);
-
+const isAppInitialized = () => !!(getAuthObj() && getStoreObj() && getDbObj())
 export function syncStatus() {
   onAuthStateChanged(getAuthObj(), (user) => {
     if (user) {
@@ -70,6 +70,7 @@ export function syncStatus() {
 }
 
 export function getUsers(setUsers) {
+  if (!isAppInitialized()) throw ("!!!ERROR: firebase app not initialized properly");
   const userCollectionRef = collection(getStoreObj(), "users");
   const q = query(userCollectionRef, where("uid", "!=", currentUserId()));
   return onSnapshot(q, (querySnapshot) => {
@@ -82,8 +83,12 @@ export function getUsers(setUsers) {
 }
 
 export async function registerUser(data) {
+  if (!isAppInitialized()) throw ("!!!ERROR: firebase app not initialized properly");
   const { email, password, ...rest } = data;
-  if (!email || !password) console.error("Email & Password required to register a Firebase user");
+  if (!email || !password) {
+    console.error("Email & Password required to register a Firebase user");
+    return
+  }
   let errorInReg = false;
   let userObj = null;
   try {
@@ -107,7 +112,11 @@ export async function registerUser(data) {
 }
 
 export async function loginUser(email, password) {
-  if (!email || !password) console.error("Email & Password required to Login a Firebase user");
+  if (!isAppInitialized()) throw ("!!!ERROR: firebase app not initialized properly");
+  if (!email || !password) {
+    console.error("Email & Password required to Login a Firebase user");
+    return
+  }
   if (getAuthObj().currentUser) return getAuthObj().currentUser;
   try {
     const resp = await signInWithEmailAndPassword(getAuthObj(), email, password);
@@ -124,6 +133,7 @@ export async function loginUser(email, password) {
 }
 
 export async function signoutUser() {
+  if (!isAppInitialized()) throw ("!!!ERROR: firebase app not initialized properly");
   try {
     await updateDoc(getUserDocRef(currentUserId()), {
       isOnline: false,
